@@ -37,17 +37,6 @@ const AppLayout = styled.div`
   ::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
   }
-  @media screen and (min-height: 901px) {
-    min-height: unset;
-    max-height: 98vh;
-    top: 50%;
-    left: 50%;
-    padding: 2%;
-    transform: translate(-50%, -50%);
-    margin: unset;
-    position: absolute;
-    width: 100%;
-  }
 `;
 
 export default Router;
