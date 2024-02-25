@@ -1,0 +1,16 @@
+{
+  "cafes": [
+    {
+      "key": 1,
+      "name": "cafe1",
+      "date": "14일 ~ 16일",
+      "location": "홍대"
+    },
+    {
+      "key": 2,
+      "name": "cafe2",
+      "date": "22일 ~ 25일",
+      "location": "강남"
+    }
+  ]
+}
