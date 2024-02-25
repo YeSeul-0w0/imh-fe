@@ -1,10 +1,23 @@
-function Main() {
+import { useNavigate } from "react-router-dom";
+function MainScreen() {
+  const navigate = useNavigate();
+  const goCalendar = () => {
+    navigate("/calendar");
+  };
   return (
     <div>
       test
-      <button link="./calndar"> see the calendar</button>
+      <br />
+      <button
+        onClick={() => {
+          goCalendar();
+        }}
+      >
+        {" "}
+        see the calendar
+      </button>
     </div>
   );
 }
 
-export default Main;
+export default MainScreen;
