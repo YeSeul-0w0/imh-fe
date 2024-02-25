@@ -7,7 +7,7 @@ import styled from "styled-components";
 function Router() {
   return (
     <AppLayout>
-      <BrowserRouter>
+      <BrowserRouter basename="imh-fe">
         <Routes>
           <Route path="/" element={<MainScreen />} />
           <Route path="/calendar" element={<Calendar />} />
