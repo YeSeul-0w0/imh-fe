@@ -1,41 +1,38 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React from "react";
-import MainScreen from "./Main/MainScreen";
-import Calendar from "./Main/Calendar";
+import MainScreen from "./main/MainScreen";
+import Calendar from "./main/Calendar";
 import styled from "styled-components";
 
 function Router() {
   return (
-    <AppLayout>
-      <BrowserRouter basename="imh-fe">
+    <BrowserRouter basename="imh-fe">
+      <AppLayout>
         <Routes>
           <Route path="/" element={<MainScreen />} />
           <Route path="/calendar" element={<Calendar />} />
         </Routes>
-      </BrowserRouter>
-    </AppLayout>
+      </AppLayout>
+    </BrowserRouter>
   );
 }
-
 const AppLayout = styled.div`
-  max-width: 500px;
+  position: fixed;
+  width: 550px;
   height: 98vh;
-  // min-height: 100vh;
-  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow-y: scroll;
   border: 1px solid lightgrey;
-  padding: 2%;
-  //display: flex;
-  //flex-flow: column nowrap;
-  //align-items: center;
-  //align-content: stretch;
-  position: relative;
-  transform: translateX(-0%);
-  /* overflow-y: hidden; */
-  overflow-x: hidden;
+  padding: 1%;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   ::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
+  }
+  @media screen and (max-width: 549px) {
+    width: 100vw;
   }
 `;
 
