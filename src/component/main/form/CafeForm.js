@@ -55,11 +55,11 @@ function CafeForm() {
         </Stepper>
       </Box>
       <Box>
-        {activeStep == 0 ? (
+        {activeStep === 0 ? (
           <Basic />
-        ) : activeStep == 1 ? (
+        ) : activeStep === 1 ? (
           <div>2</div>
-        ) : activeStep == 2 ? (
+        ) : activeStep === 2 ? (
           <div>3</div>
         ) : null}
       </Box>
@@ -70,7 +70,7 @@ function CafeForm() {
         </Button>
         <Spacer />
         <Button onClick={handleNext}>
-          {activeStep === 2 ? "Done" : "Next"}
+          {activeStep >= 2 ? "Done" : "Next"}
         </Button>
       </Flex>
     </Flex>
