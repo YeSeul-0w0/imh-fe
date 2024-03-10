@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Box,
   Flex,
@@ -5,21 +6,21 @@ import {
   IconButton,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import dummy from "../../static/cafe_list.json"; // 더미 데이터
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import dummy from "../../static/cafe_list.json"; // 더미 데이터
 import Calendar from "./Calendar";
 import List from "./List";
-import { AddIcon } from "@chakra-ui/icons";
-import AddModal from "./AddModal";
+import { useNavigate } from "react-router-dom";
 
 function MainScreen() {
   const today = new Date();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const navigate = useNavigate();
+
+  const moveForm = () => navigate(`./register_cafe_info`);
 
   return (
     <div>
-      {isOpen ? <AddModal isOpen={isOpen} onClose={onClose} /> : null}
       <Box display="grid" gridGap={2} gridAutoFlow="column" margin="2%">
         <Heading as="h2" size="xl">
           {today.getMonth() + 1}월
@@ -27,7 +28,7 @@ function MainScreen() {
         <Flex justifyContent="flex-end">
           <IconButton
             id="main-screen-add"
-            onClick={onOpen}
+            onClick={moveForm}
             isRound={true}
             size="sm"
             variant="outline"
@@ -51,7 +52,6 @@ function MainScreen() {
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <AddModal />
     </div>
   );
 }
