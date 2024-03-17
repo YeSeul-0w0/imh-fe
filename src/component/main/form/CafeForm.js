@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Flex,
-  Button,
   Stepper,
   Step,
   StepTitle,
@@ -11,7 +10,6 @@ import {
   StepNumber,
   StepIcon,
   StepSeparator,
-  Spacer,
 } from "@chakra-ui/react";
 import FormHeader from "./FormHeader";
 import Basic from "../data/Basic";
@@ -60,9 +58,9 @@ function CafeForm() {
         </Stepper>
       </Box>
       <Box>
-        {activeStep == 0 ? (
+        {activeStep === 0 ? (
           <Basic onValue={handleBasic} step={handleNext} />
-        ) : activeStep == 1 ? (
+        ) : activeStep === 1 ? (
           <div>2</div>
         ) : activeStep === 2 ? (
           <div>3</div>

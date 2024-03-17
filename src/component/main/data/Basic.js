@@ -18,6 +18,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import groupInfo from "../../../static/group_list.json";
+import PropTypes from "prop-types";
 
 function Basic({ onValue, step }) {
   const [character, setCharacter] = useState("");
@@ -110,6 +111,11 @@ function Basic({ onValue, step }) {
       </Container>
     </Flex>
   );
+}
+
+Basic.prototype = {
+  onValue: PropTypes.object.isRequired,
+  step: PropTypes.func.isRequired
 }
 
 export default Basic;
