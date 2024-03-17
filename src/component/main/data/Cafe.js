@@ -56,10 +56,15 @@ function Cafe({backStep, nextStep}) {
                     const container = document.getElementById("map")
                     const options = {
                         center: new kakao.maps.LatLng(coords.La, coords.Ma),
-                        level: 3
+                        level: 2
                     };
                     const map = new kakao.maps.Map(container, options)
                     map.setCenter(coords);
+                    const marker = new kakao.maps.Marker({
+                        map: map,
+                        position: coords
+                    });
+                    marker.setMap(map)
                 }
             })
             setCheckAddress(true)
@@ -99,9 +104,9 @@ function Cafe({backStep, nextStep}) {
                     <Button onClick={handleValid}> 주소 확인 </Button>
                 </Box>
                 <Box id="map" style={{
-                    width:"100%",
-                    height:"50vh"
-                }} margin="4">
+                    width:"90%",
+                    height:"50vh",
+                }} margin="5" display="flex" justifyContent="center" >
                 </Box>
                 <Flex marginBottom="3">
                       <Button onClick={backStep}>
