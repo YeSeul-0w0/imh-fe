@@ -10,11 +10,44 @@ import {
   RadioGroup,
   HStack,
   Spacer,
+  Select,
+  Button,
+  useToast,
+  Fade,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
-import Comic from "./select/Comic";
-import Idol from "./select/Idol";
-function Basic() {
-  const [selectRadio, setSelectRadio] = useState("");
+import groupInfo from "../../../static/group_list.json";
+
+function Basic({ onValue, step }) {
+  const [character, setCharacter] = useState("");
+  const handleName = (event) => {
+    setCharacter(event.target.value);
+  };
+  const [dimension, setDimension] = useState("");
+
+  const [groupName, setGroupName] = useState("");
+  const handleGroupName = (event) => {
+    setGroupName(event.target.value);
+  };
+
+  const toast = useToast();
+  const toastIdRef = React.useRef();
+  const setWarning = () => {
+    toastIdRef.current = toast({
+      description: "값을 입력하세요.",
+      status: "error",
+    });
+  };
+
+  const onNext = () => {
+    if (character && dimension && groupName) {
+      onValue({ character, dimension, groupName });
+      step();
+    } else {
+      setWarning();
+    }
+  };
 
   return (
     <Flex alignItems="center">
@@ -26,7 +59,12 @@ function Basic() {
         <Box p="3" marginBottom="3">
           <FormControl fontWeight="bold">
             <FormLabel>이름</FormLabel>
-            <Input type="text" placeholder="이름을 입력해주세요." />
+            <Input
+              type="text"
+              placeholder="이름을 입력해주세요."
+              value={character}
+              onChange={handleName}
+            />
           </FormControl>
         </Box>
         <Box p="3" marginBottom="3">
@@ -34,8 +72,8 @@ function Basic() {
             <FormLabel fontWeight="bold">소속을 선택해주세요</FormLabel>
             <RadioGroup
               defaultValue="Itachi"
-              value={selectRadio}
-              onChange={setSelectRadio}
+              value={dimension}
+              onChange={setDimension}
             >
               <HStack>
                 <Radio value="2d">애니&만화</Radio>
@@ -48,15 +86,26 @@ function Basic() {
           </FormControl>
         </Box>
         <Box p="3" marginBottom="3">
-          {selectRadio === "2d" ? (
-            <Comic />
-          ) : selectRadio === "idol" ? (
-            <Idol />
-          ) : selectRadio === "actor" ? (
-            "배우를 선택했습니다."
-          ) : (
-            "위에 있는 옵션을 선택해주세요."
-          )}
+          {dimension ? (
+            <Select
+              placeholder="선택하세요"
+              variant="flushed"
+              value={groupName}
+              onChange={handleGroupName}
+            >
+              {groupInfo[dimension].map((value, index) => {
+                return (
+                  <option value={value} key={index}>
+                    {" "}
+                    {value}
+                  </option>
+                );
+              })}
+            </Select>
+          ) : null}
+        </Box>
+        <Box display="flex" justifyContent="flex-end" marginBottom="3">
+          <Button onClick={onNext}>Next</Button>
         </Box>
       </Container>
     </Flex>

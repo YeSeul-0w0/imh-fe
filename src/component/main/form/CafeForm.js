@@ -32,6 +32,11 @@ function CafeForm() {
     setActiveStep((currentAction) => currentAction - 1);
   };
 
+  const [basic, setBasic] = useState({ character: "", level: "", group: "" });
+  const handleBasic = (values) => {
+    setBasic(values);
+  };
+
   return (
     <Flex minW="max-content" direction="column" minH="100%">
       <Box>
@@ -56,23 +61,23 @@ function CafeForm() {
       </Box>
       <Box>
         {activeStep == 0 ? (
-          <Basic />
+          <Basic onValue={handleBasic} step={handleNext} />
         ) : activeStep == 1 ? (
           <div>2</div>
         ) : activeStep == 2 ? (
           <div>3</div>
         ) : null}
       </Box>
-      <Spacer />
-      <Flex>
-        <Button onClick={handleBack} isDisabled={activeStep === 0}>
-          Back
-        </Button>
-        <Spacer />
-        <Button onClick={handleNext}>
-          {activeStep === 2 ? "Done" : "Next"}
-        </Button>
-      </Flex>
+      {/*<Spacer />*/}
+      {/*<Flex>*/}
+      {/*  <Button onClick={handleBack} isDisabled={activeStep === 0}>*/}
+      {/*    Back*/}
+      {/*  </Button>*/}
+      {/*  <Spacer />*/}
+      {/*  <Button onClick={handleNext}>*/}
+      {/*    {activeStep === 2 ? "Done" : "Next"}*/}
+      {/*  </Button>*/}
+      {/*</Flex>*/}
     </Flex>
   );
 }
