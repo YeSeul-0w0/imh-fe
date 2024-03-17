@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import FormHeader from "./FormHeader";
 import Basic from "../data/Basic";
+import Cafe from "../data/Cafe";
 
 function CafeForm() {
   const steps = [
@@ -61,7 +62,7 @@ function CafeForm() {
         {activeStep === 0 ? (
           <Basic onValue={handleBasic} step={handleNext} />
         ) : activeStep === 1 ? (
-          <div>2</div>
+          <Cafe backStep={handleBack} nextStep={handleNext}/>
         ) : activeStep === 2 ? (
           <div>3</div>
         ) : null}
