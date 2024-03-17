@@ -16,9 +16,9 @@ import Basic from "../data/Basic";
 
 function CafeForm() {
   const steps = [
-    { title: "1. 기본", description: "Contact Info" },
-    { title: "2. 카페", description: "Date & Time" },
-    { title: "3. 생일 카페", description: "Select Rooms" },
+    { title: "1. 기본", description: "Basic Info" },
+    { title: "2. 위치", description: "Location" },
+    { title: "3. 날짜 시간", description: "Data & Time" },
   ];
   const [activeStep, setActiveStep] = useState(0);
 
