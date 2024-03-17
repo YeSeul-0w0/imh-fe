@@ -67,16 +67,6 @@ function CafeForm() {
           <div>3</div>
         ) : null}
       </Box>
-      {/*<Spacer />*/}
-      {/*<Flex>*/}
-      {/*  <Button onClick={handleBack} isDisabled={activeStep === 0}>*/}
-      {/*    Back*/}
-      {/*  </Button>*/}
-      {/*  <Spacer />*/}
-      {/*  <Button onClick={handleNext}>*/}
-      {/*    {activeStep === 2 ? "Done" : "Next"}*/}
-      {/*  </Button>*/}
-      {/*</Flex>*/}
     </Flex>
   );
 }
