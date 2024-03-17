@@ -64,7 +64,7 @@ function CafeForm() {
           <Basic onValue={handleBasic} step={handleNext} />
         ) : activeStep == 1 ? (
           <div>2</div>
-        ) : activeStep == 2 ? (
+        ) : activeStep === 2 ? (
           <div>3</div>
         ) : null}
       </Box>

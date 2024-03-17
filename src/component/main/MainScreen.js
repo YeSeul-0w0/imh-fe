@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Flex,
-  Heading,
-  IconButton,
-  useDisclosure,
-} from "@chakra-ui/react";
+import React from "react";
+import { Box, Flex, Heading, IconButton } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import dummy from "../../static/cafe_list.json"; // 더미 데이터
