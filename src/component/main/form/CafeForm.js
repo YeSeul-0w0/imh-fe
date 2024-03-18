@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react";
 import FormHeader from "./FormHeader";
 import Basic from "../data/Basic";
+import Cafe from "../data/Cafe";
 
 function CafeForm() {
   const steps = [
@@ -34,6 +35,14 @@ function CafeForm() {
   const handleBasic = (values) => {
     setBasic(values);
   };
+
+  const [cafe, setCafe] = useState({ name: "", location: ""});
+  const handleCafe = (values) => {
+    setCafe(values);
+
+  };
+
+  console.log(cafe, basic)
 
   return (
     <Flex minW="max-content" direction="column" minH="100%">
@@ -61,21 +70,11 @@ function CafeForm() {
         {activeStep === 0 ? (
           <Basic onValue={handleBasic} step={handleNext} />
         ) : activeStep === 1 ? (
-          <div>2</div>
+          <Cafe onValue={handleCafe} backStep={handleBack} nextStep={handleNext}/>
         ) : activeStep === 2 ? (
           <div>3</div>
         ) : null}
       </Box>
-      {/*<Spacer />*/}
-      {/*<Flex>*/}
-      {/*  <Button onClick={handleBack} isDisabled={activeStep === 0}>*/}
-      {/*    Back*/}
-      {/*  </Button>*/}
-      {/*  <Spacer />*/}
-      {/*  <Button onClick={handleNext}>*/}
-      {/*    {activeStep === 2 ? "Done" : "Next"}*/}
-      {/*  </Button>*/}
-      {/*</Flex>*/}
     </Flex>
   );
 }
