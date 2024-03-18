@@ -1,11 +1,9 @@
 /*global kakao */
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     Box,
     Button,
-    ButtonGroup,
     Container,
-    Fade,
     Flex,
     FormControl,
     FormLabel,
@@ -13,10 +11,9 @@ import {
     Spacer,
     useToast
 } from "@chakra-ui/react";
-import {mergeEventStores, triggerDateSelect} from "@fullcalendar/core/internal";
 import PropTypes from "prop-types";
 
-function Cafe({backStep, nextStep}) {
+function Cafe({backStep, nextStep, onValue}) {
     const [cafeName, setCafeName] = useState("")
     const handleCafeName = (event) => {
         setCafeName(event.target.value)
@@ -75,6 +72,21 @@ function Cafe({backStep, nextStep}) {
         }
     }
 
+    const onNext = () => {
+        if (checkAddress) {
+            if (cafeName && address){
+                onValue({ cafeName, address });
+                nextStep();
+            }
+            else{
+                setWarning("값을 다 입력하세요");
+            }
+
+        } else {
+            setWarning("주소를 확인해주세요");
+        }
+    };
+
     return(
         <Flex alignItems="center">
             <Container width="100%">
@@ -91,6 +103,9 @@ function Cafe({backStep, nextStep}) {
                             value={cafeName}
                             onChange={handleCafeName}
                         />
+
+                    </FormControl>
+                    <FormControl>
                         <FormLabel marginTop="5">카페 주소</FormLabel>
                         <Input
                             type="text"
@@ -101,7 +116,7 @@ function Cafe({backStep, nextStep}) {
                     </FormControl>
                 </Box>
                 <Box display="flex" justifyContent="center">
-                    <Button onClick={handleValid}> 주소 확인 </Button>
+                    <Button onClick={handleValid} isDisabled={checkAddress}> 주소확인 </Button>
                 </Box>
                 <Box id="map" style={{
                     width:"90%",
@@ -113,7 +128,7 @@ function Cafe({backStep, nextStep}) {
                         Back
                       </Button>
                       <Spacer />
-                      <Button onClick={nextStep}>
+                      <Button onClick={onNext}>
                         Next
                       </Button>
                 </Flex>
@@ -124,6 +139,7 @@ function Cafe({backStep, nextStep}) {
 
 Cafe.prototype = {
     backStep: PropTypes.func.isRequired,
-    nextStep: PropTypes.func.isRequired
+    nextStep: PropTypes.func.isRequired,
+    onValue: PropTypes.object.isRequired
 }
 export default Cafe;

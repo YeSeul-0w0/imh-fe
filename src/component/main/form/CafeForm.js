@@ -36,6 +36,14 @@ function CafeForm() {
     setBasic(values);
   };
 
+  const [cafe, setCafe] = useState({ name: "", location: ""});
+  const handleCafe = (values) => {
+    setCafe(values);
+
+  };
+
+  console.log(cafe, basic)
+
   return (
     <Flex minW="max-content" direction="column" minH="100%">
       <Box>
@@ -62,7 +70,7 @@ function CafeForm() {
         {activeStep === 0 ? (
           <Basic onValue={handleBasic} step={handleNext} />
         ) : activeStep === 1 ? (
-          <Cafe backStep={handleBack} nextStep={handleNext}/>
+          <Cafe onValue={handleCafe} backStep={handleBack} nextStep={handleNext}/>
         ) : activeStep === 2 ? (
           <div>3</div>
         ) : null}
