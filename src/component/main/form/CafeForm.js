@@ -19,19 +19,29 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  Container,
+  Text,
+  CardBody,
+  CardHeader,
+  Card,
+  Heading,
+  Stack,
+  StackDivider,
 } from "@chakra-ui/react";
 import FormHeader from "./FormHeader";
 import Basic from "../data/Basic";
 import Cafe from "../data/Cafe";
 import Operation from "../data/Operation";
+import { useNavigate } from "react-router-dom";
 
 function CafeForm() {
+  const navigate = useNavigate();
   const steps = [
     { title: "Step 1", description: "Basic Info" },
     { title: "Step 2", description: "Location" },
     { title: "Step 3", description: "Data & Gift" },
   ];
-  const [activeStep, setActiveStep] = useState(2);
+  const [activeStep, setActiveStep] = useState(0);
 
   const handleNext = () => {
     setActiveStep((currentAction) => currentAction + 1);
@@ -41,17 +51,21 @@ function CafeForm() {
     setActiveStep((currentAction) => currentAction - 1);
   };
 
-  const [basic, setBasic] = useState({ character: "", level: "", group: "" });
+  const [basic, setBasic] = useState({
+    character: "",
+    dimension: "",
+    groupName: "",
+  });
   const handleBasic = (values) => {
     setBasic(values);
   };
 
-  const [cafe, setCafe] = useState({ name: "", location: "" });
+  const [cafe, setCafe] = useState({ cafeName: "", address: "" });
   const handleCafe = (values) => {
     setCafe(values);
   };
 
-  const [operation, setOperation] = useState({ dates: "", gifts: "" });
+  const [operation, setOperation] = useState({ dates: "", selectGifts: "" });
   const handleOperation = (value) => {
     setOperation(value);
   };
@@ -60,6 +74,8 @@ function CafeForm() {
   const onClose = () => {
     setConfirm((prev) => !prev);
   };
+
+  const onSubmit = () => navigate(`/`);
 
   return (
     <Flex minW="max-content" direction="column" minH="100%">
@@ -103,15 +119,47 @@ function CafeForm() {
       <Modal isOpen={confirm} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>입력하신 정보가 맞으신가요?</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>test</ModalBody>
-
+          <ModalBody>
+            <Card>
+              <CardBody>
+                <Stack divider={<StackDivider />} spacing="4">
+                  <Box>
+                    <Heading size="xs" textTransform="uppercase">
+                      1. 기본 정보
+                    </Heading>
+                    <Text pt="2" fontSize="sm">
+                      {basic.character}, {basic.groupName}
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading size="xs" textTransform="uppercase">
+                      2. 카페 정보
+                    </Heading>
+                    <Text pt="2" fontSize="sm">
+                      {cafe.cafeName} / {cafe.address}
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Heading size="xs" textTransform="uppercase">
+                      3. 날짜 및 특전
+                    </Heading>
+                    <Text pt="2" fontSize="sm">
+                      {operation.dates} / {operation.selectGifts}
+                    </Text>
+                  </Box>
+                </Stack>
+              </CardBody>
+            </Card>
+          </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+            <Button mr={3} onClick={onClose}>
+              닫기
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            <Button colorScheme="twitter" onClick={onSubmit}>
+              확인
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
