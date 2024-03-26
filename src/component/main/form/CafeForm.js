@@ -10,18 +10,20 @@ import {
   StepNumber,
   StepIcon,
   StepSeparator,
+  Modal,
 } from "@chakra-ui/react";
 import FormHeader from "./FormHeader";
 import Basic from "../data/Basic";
 import Cafe from "../data/Cafe";
+import Operation from "../data/Operation";
 
 function CafeForm() {
   const steps = [
-    { title: "1. 기본", description: "Basic Info" },
-    { title: "2. 위치", description: "Location" },
-    { title: "3. 날짜 시간", description: "Data & Time" },
+    { title: "Step 1", description: "Basic Info" },
+    { title: "Step 2", description: "Location" },
+    { title: "Step 3", description: "Data & Gift" },
   ];
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(2);
 
   const handleNext = () => {
     setActiveStep((currentAction) => currentAction + 1);
@@ -36,13 +38,15 @@ function CafeForm() {
     setBasic(values);
   };
 
-  const [cafe, setCafe] = useState({ name: "", location: ""});
+  const [cafe, setCafe] = useState({ name: "", location: "" });
   const handleCafe = (values) => {
     setCafe(values);
-
   };
 
-  console.log(cafe, basic)
+  const [operation, setOperation] = useState({ dates: "", gifts: "" });
+  const handleOperation = (value) => {
+    setOperation(value);
+  };
 
   return (
     <Flex minW="max-content" direction="column" minH="100%">
@@ -70,9 +74,17 @@ function CafeForm() {
         {activeStep === 0 ? (
           <Basic onValue={handleBasic} step={handleNext} />
         ) : activeStep === 1 ? (
-          <Cafe onValue={handleCafe} backStep={handleBack} nextStep={handleNext}/>
+          <Cafe
+            onValue={handleCafe}
+            backStep={handleBack}
+            nextStep={handleNext}
+          />
         ) : activeStep === 2 ? (
-          <div>3</div>
+          <Operation
+            backStep={handleBack}
+            check={setConfirm}
+            onValue={handleOperation}
+          />
         ) : null}
       </Box>
     </Flex>
