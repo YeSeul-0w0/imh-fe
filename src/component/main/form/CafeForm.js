@@ -48,6 +48,8 @@ function CafeForm() {
     setOperation(value);
   };
 
+  const [confirm, setConfirm] = useState(false);
+
   return (
     <Flex minW="max-content" direction="column" minH="100%">
       <Box>
