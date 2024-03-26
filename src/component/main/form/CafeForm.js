@@ -11,6 +11,14 @@ import {
   StepIcon,
   StepSeparator,
   Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
 } from "@chakra-ui/react";
 import FormHeader from "./FormHeader";
 import Basic from "../data/Basic";
@@ -49,6 +57,9 @@ function CafeForm() {
   };
 
   const [confirm, setConfirm] = useState(false);
+  const onClose = () => {
+    setConfirm((prev) => !prev);
+  };
 
   return (
     <Flex minW="max-content" direction="column" minH="100%">
@@ -89,6 +100,21 @@ function CafeForm() {
           />
         ) : null}
       </Box>
+      <Modal isOpen={confirm} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>test</ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant="ghost">Secondary Action</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Flex>
   );
 }
