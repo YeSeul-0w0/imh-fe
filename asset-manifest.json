@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/YeSeul-0w0/imh-fe/static/css/main.2cf8df5f.css",
+    "main.js": "/YeSeul-0w0/imh-fe/static/js/main.90185ae4.js",
+    "static/js/453.ef7c90ed.chunk.js": "/YeSeul-0w0/imh-fe/static/js/453.ef7c90ed.chunk.js",
+    "index.html": "/YeSeul-0w0/imh-fe/index.html",
+    "main.2cf8df5f.css.map": "/YeSeul-0w0/imh-fe/static/css/main.2cf8df5f.css.map",
+    "main.90185ae4.js.map": "/YeSeul-0w0/imh-fe/static/js/main.90185ae4.js.map",
+    "453.ef7c90ed.chunk.js.map": "/YeSeul-0w0/imh-fe/static/js/453.ef7c90ed.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.2cf8df5f.css",
+    "static/js/main.90185ae4.js"
+  ]
+}
