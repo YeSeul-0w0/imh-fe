@@ -7,13 +7,8 @@ import {
   Flex,
   FormControl,
   FormLabel,
-  Grid,
-  GridItem,
-  HStack,
   Input,
-  Radio,
-  RadioGroup,
-  Select,
+  Image,
   Spacer,
   Stack,
 } from "@chakra-ui/react";
@@ -75,6 +70,16 @@ function Operation({ backStep, onValue, check }) {
     }
   };
 
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      setUploadedImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
   return (
     <Flex width="100%" height="100%">
       <Container>
@@ -123,7 +128,28 @@ function Operation({ backStep, onValue, check }) {
             </Stack>
           </FormControl>
         </Box>
-        <Spacer />
+        <Container>
+          <Box p="3" marginBottom="3">
+            <FormControl>
+              <FormLabel marginBottom="6">
+                생일카페에서 제공하는 특전 물건들을 선택해주세요
+              </FormLabel>
+              <Input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              {uploadedImage && (
+                <Image
+                  marginTop="1"
+                  height="sm"
+                  src={uploadedImage}
+                  alt="cafe information"
+                />
+              )}
+            </FormControl>
+          </Box>
+        </Container>
         <Flex marginBottom="3">
           <Button onClick={backStep}>Back</Button>
           <Spacer />
