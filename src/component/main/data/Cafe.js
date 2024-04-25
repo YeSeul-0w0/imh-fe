@@ -41,13 +41,14 @@ function Cafe({ backStep, nextStep, onValue }) {
       center: new kakao.maps.LatLng(33.4507, 126.5706),
       level: 3,
     };
-    const map = new kakao.maps.Map(container, options);
+    new kakao.maps.Map(container, options);
   }, []);
 
   const handleValid = () => {
     const geocoder = new kakao.maps.services.Geocoder();
     if (address) {
       geocoder.addressSearch(address, function (result, status) {
+        console.log(status);
         if (status === kakao.maps.services.Status.OK) {
           const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
           const container = document.getElementById("map");
