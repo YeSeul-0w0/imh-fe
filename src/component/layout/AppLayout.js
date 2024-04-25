@@ -13,11 +13,11 @@ function AppLayout() {
 const Layout = styled.div`
   position: fixed;
   width: 550px;
-  height: 98vh;
+  height: 95%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  overflow-y: scroll;
+  overflow-y: auto;
   border: 1px solid lightgrey;
   padding: 1%;
   -ms-overflow-style: none; /* IE and Edge */

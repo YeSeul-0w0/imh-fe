@@ -138,7 +138,8 @@ function Operation({ backStep, onValue, check }) {
               {uploadedImage && (
                 <Image
                   marginTop="1"
-                  height="sm"
+                  boxSize="sm"
+                  objectFit="cover"
                   src={uploadedImage}
                   alt="cafe information"
                 />
