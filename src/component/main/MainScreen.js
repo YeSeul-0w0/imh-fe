@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Heading, IconButton } from "@chakra-ui/react";
+import { Box, Container, Flex, Heading, IconButton } from "@chakra-ui/react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import dummy from "../../static/cafe_list.json"; // 더미 데이터
@@ -14,7 +14,7 @@ function MainScreen() {
   const moveForm = () => navigate(`./register_cafe_info`);
 
   return (
-    <div>
+    <Container>
       <Box display="grid" gridGap={2} gridAutoFlow="column" margin="2%">
         <Heading as="h2" size="xl">
           {today.getMonth() + 1}월
@@ -31,22 +31,23 @@ function MainScreen() {
           />
         </Flex>
       </Box>
-      <Tabs isFitted variant="enclosed">
-        <TabList>
-          <Tab>List</Tab>
-          <Tab>Calendar</Tab>
-        </TabList>
-
-        <TabPanels>
-          <TabPanel style={{ height: "100vh" }}>
-            <List cafes={dummy} />
-          </TabPanel>
-          <TabPanel>
-            <Calendar />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </div>
+      <Box>
+        <Tabs isFitted variant="enclosed">
+          <TabList>
+            <Tab>Calendar</Tab>
+            <Tab>Cafe List</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <Calendar />
+            </TabPanel>
+            <TabPanel>
+              <List cafes={dummy} />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Box>
+    </Container>
   );
 }
 
