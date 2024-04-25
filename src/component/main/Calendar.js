@@ -2,7 +2,13 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 
 function Calendar() {
-  return <FullCalendar plugins={[dayGridPlugin]} initialView="dayGridMonth" />;
+  return (
+    <FullCalendar
+      plugins={[dayGridPlugin]}
+      initialView="dayGridMonth"
+      contentHeight="auto"
+    />
+  );
 }
 
 export default Calendar;
