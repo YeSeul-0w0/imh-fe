@@ -41,13 +41,9 @@ function Operation({ backStep, onValue, check }) {
     setStartDate(start);
     setEndDate(end);
     if (start && end) {
-      const datesArray = [];
-      let currentDate = new Date(start);
-      while (currentDate <= end) {
-        datesArray.push(DateFormat(currentDate));
-        currentDate.setDate(currentDate.getDate() + 1);
-      }
-      setDates(datesArray);
+      const startDateFormat = DateFormat(new Date(start));
+      const endDateFormat = DateFormat(new Date(end));
+      setDates([startDateFormat, endDateFormat]);
     } else {
       setDates([]);
     }
