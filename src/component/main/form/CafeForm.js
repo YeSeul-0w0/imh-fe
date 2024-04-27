@@ -57,7 +57,12 @@ function CafeForm() {
     setBasic(values);
   };
 
-  const [cafe, setCafe] = useState({ cafeName: "", address: "" });
+  const [cafe, setCafe] = useState({
+    cafeName: "",
+    address: "",
+    lat: "",
+    lon: "",
+  });
   const handleCafe = (values) => {
     setCafe(values);
   };

@@ -26,12 +26,22 @@ function Cafe({ backStep, nextStep, onValue }) {
 
   const [checkAddress, setCheckAddress] = useState(false);
 
+  const [lat, setLat] = useState("");
+  const [lon, setLon] = useState("");
+
   const toast = useToast();
   const toastIdRef = React.useRef();
   const setWarning = (text) => {
     toastIdRef.current = toast({
       description: text,
       status: "error",
+    });
+  };
+
+  const setSuccess = (text) => {
+    toastIdRef.current = toast({
+      description: text,
+      status: "success",
     });
   };
 
@@ -48,7 +58,6 @@ function Cafe({ backStep, nextStep, onValue }) {
     const geocoder = new kakao.maps.services.Geocoder();
     if (address) {
       geocoder.addressSearch(address, function (result, status) {
-        console.log(status);
         if (status === kakao.maps.services.Status.OK) {
           const coords = new kakao.maps.LatLng(result[0].y, result[0].x);
           const container = document.getElementById("map");
@@ -63,19 +72,22 @@ function Cafe({ backStep, nextStep, onValue }) {
             position: coords,
           });
           marker.setMap(map);
+          setLat(coords.La);
+          setLon(coords.Ma);
+          setCheckAddress(true);
+          setSuccess("주소가 성공적으로 확인되었습니다.");
+        } else {
+          setWarning("올바른 주소값을 입력하세요");
+          setCheckAddress(false);
         }
       });
-      setCheckAddress(true);
-    } else {
-      setWarning("올바른 주소값을 입력하세요");
-      setCheckAddress(false);
     }
   };
 
   const onNext = () => {
     if (checkAddress) {
       if (cafeName && address) {
-        onValue({ cafeName, address });
+        onValue({ cafeName, address, lat, lon });
         nextStep();
       } else {
         setWarning("값을 다 입력하세요");
@@ -113,9 +125,9 @@ function Cafe({ backStep, nextStep, onValue }) {
           </FormControl>
         </Box>
         <Box display="flex" justifyContent="center">
-          <Button onClick={handleValid} isDisabled={checkAddress}>
+          <Button onClick={handleValid}>
             {" "}
-            주소확인{" "}
+            {checkAddress ? "주소 확인 완료" : "주소 확인"}{" "}
           </Button>
         </Box>
         <Box
