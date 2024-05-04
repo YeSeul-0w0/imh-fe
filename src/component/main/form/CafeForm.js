@@ -24,6 +24,8 @@ import {
   Heading,
   Stack,
   StackDivider,
+  ListItem,
+  UnorderedList,
 } from "@chakra-ui/react";
 import FormHeader from "./FormHeader";
 import Basic from "../data/Basic";
@@ -57,12 +59,17 @@ function CafeForm() {
     setBasic(values);
   };
 
-  const [cafe, setCafe] = useState({ cafeName: "", address: "" });
+  const [cafe, setCafe] = useState({
+    cafeName: "",
+    address: "",
+    lat: "",
+    lon: "",
+  });
   const handleCafe = (values) => {
     setCafe(values);
   };
 
-  const [operation, setOperation] = useState({ dates: "", selectGifts: "" });
+  const [operation, setOperation] = useState({ dates: "", selectGifts: [] });
   const handleOperation = (value) => {
     setOperation(value);
   };
@@ -72,7 +79,26 @@ function CafeForm() {
     setConfirm((prev) => !prev);
   };
 
-  const onSubmit = () => navigate(`/`);
+  const onSubmit = () => {
+    const data = {
+      user_name: basic.character,
+      type_category: basic.dimension,
+      group_category: basic.groupName,
+      cafe_name: cafe.cafeName,
+      cafe_location: cafe.address,
+      cafe_location_latitude: cafe.lat,
+      cafe_location_longitude: cafe.lon,
+      start_date: operation.dates[0],
+      end_data: operation.dates[1],
+      product_list: operation.selectGifts,
+    };
+    const storageLength = window.localStorage.length;
+    window.localStorage.setItem(
+      JSON.stringify(storageLength + 1),
+      JSON.stringify(data),
+    );
+    navigate(`/`);
+  };
 
   return (
     <Flex minW="max-content" direction="column" minH="100%">
@@ -123,27 +149,37 @@ function CafeForm() {
               <CardBody>
                 <Stack divider={<StackDivider />} spacing="4">
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
+                    <Heading size="md" textTransform="uppercase">
                       1. 기본 정보
                     </Heading>
                     <Text pt="2" fontSize="sm">
-                      {basic.character}, {basic.groupName}
+                      <strong>이름:</strong> {basic.character} <br />
+                      <strong>소속:</strong> {basic.groupName}
                     </Text>
                   </Box>
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
+                    <Heading size="md" textTransform="uppercase">
                       2. 카페 정보
                     </Heading>
                     <Text pt="2" fontSize="sm">
-                      {cafe.cafeName} / {cafe.address}
+                      <strong>카페 이름:</strong> {cafe.cafeName} <br />
+                      <strong>카페 주소:</strong> {cafe.address}
                     </Text>
                   </Box>
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
+                    <Heading size="md" textTransform="uppercase">
                       3. 날짜 및 특전
                     </Heading>
                     <Text pt="2" fontSize="sm">
-                      {operation.dates} / {operation.selectGifts}
+                      {operation.dates[0]} ~ {operation.dates[1]} <br />
+                      <Text fontSize="md" as="b">
+                        특전
+                      </Text>
+                      <UnorderedList>
+                        {operation.selectGifts.map((item) => (
+                          <ListItem>{item}</ListItem>
+                        ))}
+                      </UnorderedList>
                     </Text>
                   </Box>
                 </Stack>
