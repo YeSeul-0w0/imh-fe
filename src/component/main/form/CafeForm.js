@@ -24,6 +24,8 @@ import {
   Heading,
   Stack,
   StackDivider,
+  ListItem,
+  UnorderedList,
 } from "@chakra-ui/react";
 import FormHeader from "./FormHeader";
 import Basic from "../data/Basic";
@@ -67,7 +69,7 @@ function CafeForm() {
     setCafe(values);
   };
 
-  const [operation, setOperation] = useState({ dates: "", selectGifts: "" });
+  const [operation, setOperation] = useState({ dates: "", selectGifts: [] });
   const handleOperation = (value) => {
     setOperation(value);
   };
@@ -128,27 +130,37 @@ function CafeForm() {
               <CardBody>
                 <Stack divider={<StackDivider />} spacing="4">
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
+                    <Heading size="md" textTransform="uppercase">
                       1. 기본 정보
                     </Heading>
                     <Text pt="2" fontSize="sm">
-                      {basic.character}, {basic.groupName}
+                      <strong>이름:</strong> {basic.character} <br />
+                      <strong>소속:</strong> {basic.groupName}
                     </Text>
                   </Box>
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
+                    <Heading size="md" textTransform="uppercase">
                       2. 카페 정보
                     </Heading>
                     <Text pt="2" fontSize="sm">
-                      {cafe.cafeName} / {cafe.address}
+                      <strong>카페 이름:</strong> {cafe.cafeName} <br />
+                      <strong>카페 주소:</strong> {cafe.address}
                     </Text>
                   </Box>
                   <Box>
-                    <Heading size="xs" textTransform="uppercase">
+                    <Heading size="md" textTransform="uppercase">
                       3. 날짜 및 특전
                     </Heading>
                     <Text pt="2" fontSize="sm">
-                      {operation.dates} / {operation.selectGifts}
+                      {operation.dates[0]} ~ {operation.dates[1]} <br />
+                      <Text fontSize="md" as="b">
+                        특전
+                      </Text>
+                      <UnorderedList>
+                        {operation.selectGifts.map((item) => (
+                          <ListItem>{item}</ListItem>
+                        ))}
+                      </UnorderedList>
                     </Text>
                   </Box>
                 </Stack>
