@@ -79,7 +79,26 @@ function CafeForm() {
     setConfirm((prev) => !prev);
   };
 
-  const onSubmit = () => navigate(`/`);
+  const onSubmit = () => {
+    const data = {
+      user_name: basic.character,
+      type_category: basic.dimension,
+      group_category: basic.groupName,
+      cafe_name: cafe.cafeName,
+      cafe_location: cafe.address,
+      cafe_location_latitude: cafe.lat,
+      cafe_location_longitude: cafe.lon,
+      start_date: operation.dates[0],
+      end_data: operation.dates[1],
+      product_list: operation.selectGifts,
+    };
+    const storageLength = window.localStorage.length;
+    window.localStorage.setItem(
+      JSON.stringify(storageLength + 1),
+      JSON.stringify(data),
+    );
+    navigate(`/`);
+  };
 
   return (
     <Flex minW="max-content" direction="column" minH="100%">
